@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Quiz_w3d1
 {
@@ -10,7 +11,9 @@ namespace Quiz_w3d1
         static void Main(string[] args)
         {
             InitializeQuestions();
-            TakeQuiz();
+            TakeQuiz(OpenQuestions);
+            //herhaal de moeilijkste vragen
+            TakeQuiz(AlleenDezeGraad(3));
             Console.ReadLine();
         }
 
@@ -22,23 +25,45 @@ namespace Quiz_w3d1
             OpenQuestions.Add(new OpenQuestion() { Vraag = "Welk celonderdeel zorgt ervoor dat een plant z'n eigen voedsel kan maken?", Antwoord = "bladgroenkorrels", Categorie = "Biologie", Graad = 3 });
         }
 
-        static void TakeQuiz()
+        static void TakeQuiz(List<IOpenQuestion> list)
         {
-            foreach(OpenQuestion question in OpenQuestions)
+            foreach (OpenQuestion question in list)
             {
                 Console.WriteLine(question.Vraag);
                 question.CheckAnswer(Console.ReadLine());
             }
         }
+
         //Gebruik LINQ om de vragen te sorteren van gemakkelijk naar moeilijk of op category. Maak hiervoor gebruik van het keyword var.
-        static void OrderQuestions()
+        static List<IOpenQuestion> OrderQuestionsByGraad()
         {
-
+            var MakNaarMoei = (from q in OpenQuestions
+                               orderby q.Graad
+                               select q).ToList();
+            return MakNaarMoei;
         }
-        //Gebruik LINQ om alleen de vragen te stellen van een bepaalde moeilijkheidsgraad of van een bepaalde category.Maak hiervoor geen gebruik van het keyword var.
-        static void SelectQuestions()
+        static List<IOpenQuestion> OrderQuestionsByCategory()
         {
+            var OpCategorie = (from q in OpenQuestions
+                               orderby q.Categorie
+                               select q).ToList();
+            return OpCategorie;
+        }
 
+        //Gebruik LINQ om alleen de vragen te stellen van een bepaalde moeilijkheidsgraad of van een bepaalde category.Maak hiervoor geen gebruik van het keyword var.
+        static List<IOpenQuestion> AlleenDezeGraad(int Moeilijkheid)
+        {
+            List<IOpenQuestion> VragenvanGraad = (from q in OpenQuestions
+                                  where q.Graad == Moeilijkheid
+                                  select q).ToList();
+            return VragenvanGraad;
+        }
+        static List<IOpenQuestion> AlleenDezeCategorie(string Cat)
+        {
+            List<IOpenQuestion> VragenvanCat = (from q in OpenQuestions
+                                                  where q.Categorie == Cat
+                                                  select q).ToList();
+            return VragenvanCat;
         }
     }
 }
