@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Quiz_w3d1
 {
-    class OpenQuestion : IOpenQuestion
+    class OpenQuestion : IQuestion
     {
         public string Vraag { get; set; }
         public string Antwoord { get; set; }

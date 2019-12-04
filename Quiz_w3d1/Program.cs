@@ -6,7 +6,7 @@ namespace Quiz_w3d1
 {
     class Program
     {
-        static List<IOpenQuestion> OpenQuestions = new List<IOpenQuestion>();
+        static List<IQuestion> OpenQuestions = new List<IQuestion>();
 
         static void Main(string[] args)
         {
@@ -25,7 +25,7 @@ namespace Quiz_w3d1
             OpenQuestions.Add(new OpenQuestion() { Vraag = "Welk celonderdeel zorgt ervoor dat een plant z'n eigen voedsel kan maken?", Antwoord = "bladgroenkorrels", Categorie = "Biologie", Graad = 3 });
         }
 
-        static void TakeQuiz(List<IOpenQuestion> list)
+        static void TakeQuiz(List<IQuestion> list)
         {
             foreach (OpenQuestion question in list)
             {
@@ -35,14 +35,14 @@ namespace Quiz_w3d1
         }
 
         //Gebruik LINQ om de vragen te sorteren van gemakkelijk naar moeilijk of op category. Maak hiervoor gebruik van het keyword var.
-        static List<IOpenQuestion> OrderQuestionsByGraad()
+        static List<IQuestion> OrderQuestionsByGraad()
         {
             var MakNaarMoei = (from q in OpenQuestions
                                orderby q.Graad
                                select q).ToList();
             return MakNaarMoei;
         }
-        static List<IOpenQuestion> OrderQuestionsByCategory()
+        static List<IQuestion> OrderQuestionsByCategory()
         {
             var OpCategorie = (from q in OpenQuestions
                                orderby q.Categorie
@@ -51,16 +51,16 @@ namespace Quiz_w3d1
         }
 
         //Gebruik LINQ om alleen de vragen te stellen van een bepaalde moeilijkheidsgraad of van een bepaalde category.Maak hiervoor geen gebruik van het keyword var.
-        static List<IOpenQuestion> AlleenDezeGraad(int Moeilijkheid)
+        static List<IQuestion> AlleenDezeGraad(int Moeilijkheid)
         {
-            List<IOpenQuestion> VragenvanGraad = (from q in OpenQuestions
+            List<IQuestion> VragenvanGraad = (from q in OpenQuestions
                                   where q.Graad == Moeilijkheid
                                   select q).ToList();
             return VragenvanGraad;
         }
-        static List<IOpenQuestion> AlleenDezeCategorie(string Cat)
+        static List<IQuestion> AlleenDezeCategorie(string Cat)
         {
-            List<IOpenQuestion> VragenvanCat = (from q in OpenQuestions
+            List<IQuestion> VragenvanCat = (from q in OpenQuestions
                                                   where q.Categorie == Cat
                                                   select q).ToList();
             return VragenvanCat;
