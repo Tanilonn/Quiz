@@ -10,5 +10,17 @@ namespace Quiz_w3d1
         public string Antwoord { get; set; }
         public int Graad { get; set; }
         public string Categorie { get; set; }
+
+        public void CheckAnswer(string input)
+        {
+            if (input == Antwoord)
+            {
+                Console.WriteLine("Correct!");
+            }
+            else
+            {
+                Console.WriteLine("Fout! Het antwoord was: " + Antwoord);
+            }
+        }
     }
 }

@@ -11,5 +11,7 @@ namespace Quiz_w3d1
         int Graad { get; set; }
         string Categorie { get; set; }
 
+        void CheckAnswer(string input);
+
     }
 }

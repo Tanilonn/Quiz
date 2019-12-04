@@ -9,16 +9,26 @@ namespace Quiz_w3d1
 
         static void Main(string[] args)
         {
+            InitializeQuestions();
+            TakeQuiz();
             Console.ReadLine();
-            Console.WriteLine("Hello World!");
         }
 
         static void InitializeQuestions()
         {
-            OpenQuestions.Add(new OpenQuestion() { Vraag = "wat is 1 + 1", Antwoord = "2", Categorie = "Rekenen", Graad = 1 });
-            OpenQuestions.Add(new OpenQuestion() { Vraag = "hoeveel botten heeft een mens", Antwoord = "206", Categorie = "Biologie", Graad = 2 });
-            OpenQuestions.Add(new OpenQuestion() { Vraag = "vertaal 'large'", Antwoord = "groot", Categorie = "Engels", Graad = 1 });
-            OpenQuestions.Add(new OpenQuestion() { Vraag = "welk celonderdeel zorgt ervoor dat een plant z'n eigen voedsel kan maken?", Antwoord = "bladgroenkorrels", Categorie = "Biologie", Graad = 3 });
+            OpenQuestions.Add(new OpenQuestion() { Vraag = "Wat is 1 + 1", Antwoord = "2", Categorie = "Rekenen", Graad = 1 });
+            OpenQuestions.Add(new OpenQuestion() { Vraag = "Hoeveel botten heeft een mens", Antwoord = "206", Categorie = "Biologie", Graad = 2 });
+            OpenQuestions.Add(new OpenQuestion() { Vraag = "Vertaal 'large'", Antwoord = "groot", Categorie = "Engels", Graad = 1 });
+            OpenQuestions.Add(new OpenQuestion() { Vraag = "Welk celonderdeel zorgt ervoor dat een plant z'n eigen voedsel kan maken?", Antwoord = "bladgroenkorrels", Categorie = "Biologie", Graad = 3 });
+        }
+
+        static void TakeQuiz()
+        {
+            foreach(OpenQuestion question in OpenQuestions)
+            {
+                Console.WriteLine(question.Vraag);
+                question.CheckAnswer(Console.ReadLine());
+            }
         }
         //Gebruik LINQ om de vragen te sorteren van gemakkelijk naar moeilijk of op category. Maak hiervoor gebruik van het keyword var.
         static void OrderQuestions()
