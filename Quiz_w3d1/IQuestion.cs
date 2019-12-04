@@ -12,6 +12,7 @@ namespace Quiz_w3d1
         string Categorie { get; set; }
 
         void CheckAnswer(string input);
+        void DisplayQuestion();
 
     }
 }
